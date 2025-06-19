@@ -1,6 +1,7 @@
 # Insurance Service
 
 insurance-service is a Java-based Spring Boot application that provides an API to retrieve insurance details for individuals. I have only implemented a GET method to fetch insurance data; PUT, DELETE, and POST methods are not included. The API is currently public, but in a real-world scenario, it should be secured—either by implementing OAuth 2.0 or using a service key for service-to-service communication.
+For demonstration purposes, the service uses hardcoded mock data instead of a real database. In a actual project, this should be replaced with a proper database and repository layer to handle persistent data storage and retrieval.
 
 ## Features
 - Retrieve insurance details for a person.
