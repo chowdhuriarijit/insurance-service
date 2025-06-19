@@ -1,7 +1,6 @@
 # Insurance Service
 
-The `insurance-service` is a Java-based Spring Boot application that provides API to  retrieve insurance details for individuals. I only added get method to retrive the insurance data , put , delete , add I did not add . Also I made this api as public but
-in real life sceanario it should be protected , so either we can implement oauth2.0 , can use service key if service to service api call happend etc.
+insurance-service is a Java-based Spring Boot application that provides an API to retrieve insurance details for individuals. I have only implemented a GET method to fetch insurance data; PUT, DELETE, and POST methods are not included. The API is currently public, but in a real-world scenario, it should be secured—either by implementing OAuth 2.0 or using a service key for service-to-service communication.
 
 ## Features
 - Retrieve insurance details for a person.
@@ -27,12 +26,6 @@ in real life sceanario it should be protected , so either we can implement oauth
    ```
 
 4. In the local environment application will start on `http://localhost:8080` by default.
-
-## Configuration
-The application uses the following configuration properties:
-- `insurance.service.host`: The base URL for the insurance service (default: `http://localhost:8080`).
-
-You can override these properties in the `application.properties` or via environment variables.
 
 ## API Endpoints
 ### Get Insurance Details
