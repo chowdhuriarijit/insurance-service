@@ -1,16 +1,13 @@
 # Insurance Service
 
-The `insurance-service` is a Java-based Spring Boot application that provides APIs to manage and retrieve insurance details for individuals.
+The `insurance-service` is a Java-based Spring Boot application that provides API to  retrieve insurance details for individuals. I only added get method to retrive the insurance data , put , delete , add I did not add . Also I made this api as public but
+in real life sceanario it should be protected , so either we can implement oauth2.0 , can use service key if service to service api call happend etc.
 
 ## Features
 - Retrieve insurance details for a person.
 - Calculate total insurance cost for a person.
 - Mock data integration for testing purposes.
 
-## Prerequisites
-- Java 11 or higher
-- Maven 3.6 or higher
-- Spring Boot 2.5 or higher
 
 ## Setup Instructions
 1. Clone the repository:
@@ -29,7 +26,7 @@ The `insurance-service` is a Java-based Spring Boot application that provides AP
    mvn spring-boot:run
    ```
 
-4. The application will start on `http://localhost:8080` by default.
+4. In the local environment application will start on `http://localhost:8080` by default.
 
 ## Configuration
 The application uses the following configuration properties:
@@ -39,26 +36,61 @@ You can override these properties in the `application.properties` or via environ
 
 ## API Endpoints
 ### Get Insurance Details
+Feature flag discountEnabled is configured in launchdarkly portal and for demo purpose I have only enabled it for person with Id 456 , as the bellow insurance response is for person with id 123 thats why discountEnabled false for this person and discount is not enabled. 
 - **URL**: `/api/v1/insurance/{personId}`
 - **Method**: `GET`
 - **Response**:
   ```json
-  {
-    "personId": "456",
-    "totalInsuranceCost": 1800.0,
-    "insurances": [
-      {
-        "type": "Health Insurance",
-        "cost": 1000.0,
-        "status": "Active"
-      },
-      {
-        "type": "Car Insurance",
-        "cost": 500.0,
-        "status": "Active"
-      }
-    ]
-  }
+    {
+        "personId": "123",
+        "insurances": [
+            {
+            "name": "Pet insurance",
+            "premium": 250,
+            "status": "Active"
+            },
+            {
+            "name": "Personal health insurance",
+            "premium": 1200,
+            "status": "Active"
+            },
+            {
+            "name": "Car insurance",
+            "premium": 900,
+            "status": "Active"
+            }
+        ],
+        "totalInsuranceCost": 2350,
+        "vehicle": {
+            "registrationNumber": "TEST123",
+            "make": "Toyota",
+            "model": "Corolla",
+            "color": "Blue"
+        },
+        "discountApplied": "false"
+    }
+  ```
+For person with id 456 discount is enabled so the response is bellow
+```json
+    {
+        "personId": "456",
+        "insurances": [
+            {
+            "name": "Home insurance",
+            "premium": 1500,
+            "status": "Active"
+            },
+            {
+            "name": "Travel insurance",
+            "premium": 300,
+            "status": "Active"
+            }
+        ],
+        "totalInsuranceCost": 1800,
+        "discountApplied": "true",
+        "discountAmount": 180,
+        "discountedTotalInsuranceCost": 1620
+    }
   ```
 
 ## Running Tests
@@ -67,8 +99,10 @@ To run the integration tests:
 mvn test
 ```
 
-The integration tests are located in:
-
 ## Mock Data
 The application uses `MockInsurance` and `MockInsuranceData` classes to simulate insurance data for testing purposes.
+
+## Note regarding feature toggle
+I've used feature flags in my various projects to control application behavior dynamically without redeploying code. While here I demonstrated it with a simple case—enabling or disabling discount enabled flag  using LaunchDarkly, but the use of feature toggles goes far beyond that.
+In real-world applications, I've also worked with feature toggle tools like Optimizely, Azure App Configuration (feature management),  implemented both feature toggles and A/B testing.
 
