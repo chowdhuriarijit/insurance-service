@@ -12,7 +12,7 @@ in real life sceanario it should be protected , so either we can implement oauth
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/chowdhuriarijit/insurance-service.git
    cd insurance-service
    ```
 
